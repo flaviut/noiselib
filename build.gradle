@@ -1,0 +1,91 @@
+import java.nio.file.NoSuchFileException
+
+apply plugin: 'scala'
+apply plugin: 'idea'
+apply plugin: 'application'
+
+mainClassName = "factorygame.Main"
+
+repositories {
+	mavenCentral()
+	maven { url 'https://oss.sonatype.org/content/repositories/releases' }
+}
+
+idea { module { excludeDirs += file('.idea') } }
+
+ext {
+	versions =
+			[
+					scala: '2.10.3',
+					sscala: 'Replaced with first 4 digits of scala',
+					scalacheck: '1.11.1',
+					scalatest: '2.0.1-SNAP',
+					junit: '4.11',
+					lwjgl: '2.9.1'
+			]
+	versions.sscala = versions.scala.substring(0, 4)
+}
+
+dependencies {
+	compile "org.lwjgl.lwjgl:lwjgl:$versions.lwjgl"
+	compile "org.lwjgl.lwjgl:lwjgl_util:$versions.lwjgl"
+	compile "org.scala-lang:scala-library:$versions.scala"
+
+	testCompile "org.scalacheck:scalacheck_$versions.sscala:$versions.scalacheck"
+	testCompile "org.scalatest:scalatest_$versions.sscala:$versions.scalatest"
+	testCompile "junit:junit:$versions.junit"
+
+	runtime "org.scala-lang:scala-compiler:$versions.scala"
+}
+
+sourceSets {
+	main {
+		scala { srcDirs = ['src'] }
+		java { srcDirs = ['src'] }
+		resources { srcDirs = ['resource'] }
+	}
+	test {
+		scala { srcDirs = ['test'] }
+		java { srcDirs = ['test'] }
+	}
+}
+
+tasks.withType(ScalaCompile) { compileScala.scalaCompileOptions.useAnt = false }
+
+def setupLWJGL() {
+	def os = System.getProperty('os.name')
+	switch (os) {
+		case 'Linux':
+			os = 'linux'
+			break
+		case 'MacOSX':
+			os = 'osx'
+			break
+		case 'Windows.*':
+			os = 'windows'
+			break
+		default: throw new NoSuchFileException("Unknown OS: $os".toString())
+	}
+
+	// stackoverflow.com/a/9580193/2299084
+	String loc = project.configurations.compile.find { it.name == ("lwjgl-platform-$versions.lwjgl-natives-${os}.jar") }
+	// Cut off .jar
+	loc = loc.substring(0, loc.length() - 4)
+	logger.debug("Found LWJGL Natives: $loc" as String)
+	File dir = new File(loc)
+
+
+	if (!dir.exists()) {
+		copy {
+			from zipTree(loc + '.jar')
+			into loc
+		}
+		new File(loc + 'META-INF').delete()
+	}
+
+	return "-Djava.library.path=$loc".toString()
+}
+
+run {
+	jvmArgs setupLWJGL()
+}
