@@ -1,41 +1,55 @@
-import java.nio.file.NoSuchFileException
-
 apply plugin: 'scala'
 apply plugin: 'idea'
 apply plugin: 'application'
 
-mainClassName = "factorygame.Main"
+mainClassName = 'factorygame.Main'
+version = '0.1.0'
 
 repositories {
 	mavenCentral()
 	maven { url 'https://oss.sonatype.org/content/repositories/releases' }
+	maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+	mavenLocal()
 }
 
 idea { module { excludeDirs += file('.idea') } }
 
 ext {
-	versions =
+	ver =
 			[
+					gdx: '0.9.9',
 					scala: '2.10.3',
 					sscala: 'Replaced with first 4 digits of scala',
+					akka: '2.+',
 					scalacheck: '1.11.1',
 					scalatest: '2.0.1-SNAP',
 					junit: '4.11',
-					lwjgl: '2.9.1'
+					lwjgl: '2.9.1',
+					spire: '0.7.1',
+					javalution: '6.0.0',
+					orientdb: '1.6.2'
 			]
-	versions.sscala = versions.scala.substring(0, 4)
+	ver.sscala = ver.scala.substring(0, 4)
+	gdxVersion = ver.gdx
 }
 
 dependencies {
-	compile "org.lwjgl.lwjgl:lwjgl:$versions.lwjgl"
-	compile "org.lwjgl.lwjgl:lwjgl_util:$versions.lwjgl"
-	compile "org.scala-lang:scala-library:$versions.scala"
+	compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+	compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
+	compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
 
-	testCompile "org.scalacheck:scalacheck_$versions.sscala:$versions.scalacheck"
-	testCompile "org.scalatest:scalatest_$versions.sscala:$versions.scalatest"
-	testCompile "junit:junit:$versions.junit"
+	compile "org.scala-lang:scala-library:$ver.scala"
+	compile "com.typesafe.akka:akka-actor_$ver.sscala:$ver.akka"
+	compile "org.spire-math:spire_$ver.sscala:$ver.spire"
+	compile "org.javolution:javolution-core-java:$ver.javalution"
+	compile "com.orientechnologies:orientdb-core:$ver.orientdb"
+	compile fileTree(dir: 'libs', include: '*.jar')
 
-	runtime "org.scala-lang:scala-compiler:$versions.scala"
+	testCompile "org.scalacheck:scalacheck_$ver.sscala:$ver.scalacheck"
+	testCompile "org.scalatest:scalatest_$ver.sscala:$ver.scalatest"
+	testCompile "junit:junit:$ver.junit"
+
+	runtime "org.scala-lang:scala-compiler:$ver.scala"
 }
 
 sourceSets {
@@ -52,40 +66,4 @@ sourceSets {
 
 tasks.withType(ScalaCompile) { compileScala.scalaCompileOptions.useAnt = false }
 
-def setupLWJGL() {
-	def os = System.getProperty('os.name')
-	switch (os) {
-		case 'Linux':
-			os = 'linux'
-			break
-		case 'MacOSX':
-			os = 'osx'
-			break
-		case 'Windows.*':
-			os = 'windows'
-			break
-		default: throw new NoSuchFileException("Unknown OS: $os".toString())
-	}
-
-	// stackoverflow.com/a/9580193/2299084
-	String loc = project.configurations.compile.find { it.name == ("lwjgl-platform-$versions.lwjgl-natives-${os}.jar") }
-	// Cut off .jar
-	loc = loc.substring(0, loc.length() - 4)
-	logger.debug("Found LWJGL Natives: $loc" as String)
-	File dir = new File(loc)
-
-
-	if (!dir.exists()) {
-		copy {
-			from zipTree(loc + '.jar')
-			into loc
-		}
-		new File(loc + 'META-INF').delete()
-	}
-
-	return "-Djava.library.path=$loc".toString()
-}
-
-run {
-	jvmArgs setupLWJGL()
-}
+run { ignoreExitValue = true }
