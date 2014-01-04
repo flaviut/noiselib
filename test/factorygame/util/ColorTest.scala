@@ -18,8 +18,7 @@ class ColorTest extends TestBase {
 		forAll(ColorGen)(v => {
 			val col = v._1
 			val num = v._2
-			println(col, num)
-			(col.r, col.g, col.b, col.a) === num
+			(col.r, col.g, col.b, col.a) mustEqual num
 		})
 	}
 }

@@ -1,11 +1,6 @@
-# IntelliJ IDEA
-.idea
 *.iml
 *.ipr
 *.iws
-
-# Gradle
-.gradle
-build
-
-*~
+.gradle/
+build/
+out/
