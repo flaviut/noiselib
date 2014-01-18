@@ -15,10 +15,10 @@ class Color(val rgba: Int) extends AnyVal {
 	def +(v: Long) = update((r + v).toInt, (g + v).toInt, (b + v).toInt)
 	def -(v: Long) = update((r - v).toInt, (g - v).toInt, (b - v).toInt)
 
-	def +(v: Float) = fupdate(fr + v, fg + v, fb + v)
-	def -(v: Float) = fupdate(fr - v, fg - v, fb - v)
-	def *(v: Float) = fupdate(fr * v, fg * v, fb * v)
-	def /(v: Float) = fupdate(fr / v, fg / v, fb / v)
+	def +(v: Double) = fupdate(fr + v, fg + v, fb + v)
+	def -(v: Double) = fupdate(fr - v, fg - v, fb - v)
+	def *(v: Double) = fupdate(fr * v, fg * v, fb * v)
+	def /(v: Double) = fupdate(fr / v, fg / v, fb / v)
 
 	def +(v: Color) = update(r + v.r, g + v.g, b + v.b)
 	def -(v: Color) = update(r - v.r, g - v.g, b - v.b)
@@ -28,7 +28,7 @@ class Color(val rgba: Int) extends AnyVal {
 	def update(newR: Int = r, newG: Int = g, newB: Int = b, newA: Int = a): Color =
 		Color(newR, newG, newB, newA)
 
-	def fupdate(newR: Float = r, newG: Float = g, newB: Float = b, newA: Float = a): Color =
+	def fupdate(newR: Double = r, newG: Double = g, newB: Double = b, newA: Double = a): Color =
 		Color(newR, newG, newB, newA)
 
 	override def toString = s"Color(r=$r,g=$g,b=$b,a=$a)"
@@ -41,13 +41,13 @@ object Color {
 	def apply(r: Int, g: Int, b: Int, a: Int): Color =
 		new Color(r << 24 | g << 16 | b << 8 | a)
 
-	def apply(r: Float, g: Float, b: Float): Color =
+	def apply(r: Double, g: Double, b: Double): Color =
 		Color(
 			(r * 255).toInt & 0xFF,
 			(g * 255).toInt & 0xFF,
 			(b * 255).toInt & 0xFF)
 
-	def apply(r: Float, g: Float, b: Float, a: Float): Color =
+	def apply(r: Double, g: Double, b: Double, a: Double): Color =
 		Color(
 			(r * 255).toInt & 0xFF,
 			(g * 255).toInt & 0xFF,
