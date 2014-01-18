@@ -1,69 +1,75 @@
-apply plugin: 'scala'
-apply plugin: 'idea'
 apply plugin: 'application'
+apply plugin: 'idea'
 
 mainClassName = 'factorygame.Main'
-version = '0.1.0'
 
-repositories {
-	mavenCentral()
-	maven { url 'https://oss.sonatype.org/content/repositories/releases' }
-	maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-	mavenLocal()
-}
+dependencies { compile project(':macros') }
 
 idea { module { excludeDirs += file('.idea') } }
-
-ext {
-	ver =
-			[
-					gdx: '0.9.9',
-					scala: '2.10.3',
-					sscala: 'Replaced with first 4 digits of scala',
-					akka: '2.+',
-					scalacheck: '1.11.1',
-					scalatest: '2.0.1-SNAP',
-					junit: '4.11',
-					lwjgl: '2.9.1',
-					spire: '0.7.1',
-					javalution: '6.0.0',
-					orientdb: '1.6.2'
-			]
-	ver.sscala = ver.scala.substring(0, 4)
-	gdxVersion = ver.gdx
-}
-
-dependencies {
-	compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-	compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
-	compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
-
-	compile "org.scala-lang:scala-library:$ver.scala"
-	compile "com.typesafe.akka:akka-actor_$ver.sscala:$ver.akka"
-	compile "org.spire-math:spire_$ver.sscala:$ver.spire"
-	compile "org.javolution:javolution-core-java:$ver.javalution"
-	compile "com.orientechnologies:orientdb-core:$ver.orientdb"
-	compile fileTree(dir: 'libs', include: '*.jar')
-
-	testCompile "org.scalacheck:scalacheck_$ver.sscala:$ver.scalacheck"
-	testCompile "org.scalatest:scalatest_$ver.sscala:$ver.scalatest"
-	testCompile "junit:junit:$ver.junit"
-
-	runtime "org.scala-lang:scala-compiler:$ver.scala"
-}
-
-sourceSets {
-	main {
-		scala { srcDirs = ['src'] }
-		java { srcDirs = ['src'] }
-		resources { srcDirs = ['resource'] }
-	}
-	test {
-		scala { srcDirs = ['test'] }
-		java { srcDirs = ['test'] }
-	}
-}
 
 tasks.withType(ScalaCompile) { compileScala.scalaCompileOptions.useAnt = false }
 
 run { ignoreExitValue = true }
+
+allprojects {
+	apply plugin: 'idea'
+	apply plugin: 'scala'
+	version = '0.1.0'
+
+	repositories {
+		mavenCentral()
+		maven { url 'https://oss.sonatype.org/content/repositories/releases' }
+		maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+		mavenLocal()
+	}
+
+	ext {
+		ver =
+				[
+						gdx: '0.9.9',
+						scala: '2.10.3',
+						sscala: 'Replaced with first 4 digits of scala',
+						akka: '2.+',
+						scalacheck: '1.11.1',
+						scalatest: '2.0.1-SNAP',
+						junit: '4.11',
+						lwjgl: '2.9.1',
+						spire: '0.7.1',
+						javalution: '6.0.0',
+						orientdb: '1.6.2'
+				]
+		ver.sscala = ver.scala.substring(0, 4)
+		gdxVersion = ver.gdx
+	}
+
+	dependencies {
+		compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+		compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
+		compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+
+		compile "org.scala-lang:scala-library:$ver.scala"
+		compile "com.typesafe.akka:akka-actor_$ver.sscala:$ver.akka"
+		compile "org.spire-math:spire_$ver.sscala:$ver.spire"
+		compile "org.javolution:javolution-core-java:$ver.javalution"
+		compile "com.orientechnologies:orientdb-core:$ver.orientdb"
+		compile fileTree(dir: 'libs', include: '*.jar')
+
+		testCompile "org.scalacheck:scalacheck_$ver.sscala:$ver.scalacheck"
+		testCompile "org.scalatest:scalatest_$ver.sscala:$ver.scalatest"
+		testCompile "junit:junit:$ver.junit"
+
+		runtime "org.scala-lang:scala-compiler:$ver.scala"
+	}
+
+	sourceSets {
+		main {
+			scala { srcDirs = ['src'] }
+			java { srcDirs = ['src'] }
+			resources { srcDirs = ['resource'] }
+		}
+		test {
+			scala { srcDirs = ['test'] }
+			java { srcDirs = ['test'] }
+		}
+	}
+}
