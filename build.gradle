@@ -26,17 +26,18 @@ allprojects {
 	ext {
 		ver =
 				[
-						gdx: '0.9.9',
-						scala: '2.10.3',
-						sscala: 'Replaced with first 4 digits of scala',
-						akka: '2.+',
-						scalacheck: '1.11.1',
-						scalatest: '2.0.1-SNAP',
-						junit: '4.11',
-						lwjgl: '2.9.1',
-						spire: '0.7.1',
-						javalution: '6.0.0',
-						orientdb: '1.6.2'
+						gdx        : '0.9.9',
+						scala      : '2.10.3',
+						sscala     : 'Replaced with first 4 digits of scala',
+						akka       : '2.+',
+						scalacheck : '1.11.1',
+						scalatest  : '2.0.1-SNAP',
+						junit      : '4.11',
+						lwjgl      : '2.9.1',
+						spire      : '0.7.1',
+						javalution : '6.0.0',
+						orientdb   : '1.6.2',
+						annotations: '13.0'
 				]
 		ver.sscala = ver.scala.substring(0, 4)
 		gdxVersion = ver.gdx
@@ -70,6 +71,13 @@ allprojects {
 		test {
 			scala { srcDirs = ['test'] }
 			java { srcDirs = ['test'] }
+		}
+	}
+
+	idea {
+		project {
+			jdkName = '1.8'
+			languageLevel = '1.8'
 		}
 	}
 }
