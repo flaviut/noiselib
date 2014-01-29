@@ -14,7 +14,7 @@ import scala.language.postfixOps
  *
  * Translated into Scala from Java
  */
-class Simplex(val seed: Int = 0) extends FBMOctave {
+class Simplex(val seed: Int = 0) extends NoiseSource {
 	/*
 	 * Benchmark of 1000x1000 each trial
 	 *

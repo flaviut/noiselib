@@ -10,7 +10,7 @@ import factorygame.util.noise.LinearInterp.UglyLinearInterp
  * Creates non-coherent random noise
  * Uses Nearest-Neighbor interpolation by default
  */
-class WhiteNoise(seed: Int = 0) extends FBMOctave {
+class WhiteNoise(seed: Int = 0) extends NoiseSource {
 	private val rand = new PositionalRandom(seed)
 
 	private implicit def long2Int(v: Long) = v.toInt
@@ -42,7 +42,7 @@ object LinearInterp {
 	/**
 	 * Clean implementation, but 2/3 slower than ugly interp
 	 */
-	trait NiceLinearInterp extends WhiteNoise {
+	protected trait NiceLinearInterp extends WhiteNoise {
 		override def gen(x: Double, y: Double) = {
 			val (x1, x2) = (floor(x), floor(x) + 1)
 			val (y1, y2) = (floor(y), floor(y) + 1)
@@ -158,7 +158,7 @@ object LinearInterp {
 	/**
 	 * Ugly, but a bit faster and stabilized on Hotspot faster
 	 */
-	trait UglyLinearInterp extends WhiteNoise {
+	protected trait UglyLinearInterp extends WhiteNoise {
 		override def gen(x: Double, y: Double) = {
 			val (x1, x2) = (floor(x), floor(x) + 1)
 			val (y1, y2) = (floor(y), floor(y) + 1)
