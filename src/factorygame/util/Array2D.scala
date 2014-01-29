@@ -4,8 +4,10 @@ import scala.reflect.ClassTag
 import scala.collection.Traversable
 import spire.syntax.cfor._
 
-class Array2D[@specialized(Specializable.Primitives) T: ClassTag](size: Int) extends Traversable[Pos[T]] {
-	private val arr = new Array[T](size * size)
+class Array2D[@specialized(Specializable.Primitives) T: ClassTag](val width: Int, val height: Int) extends Traversable[Pos[T]] {
+	private val arr = new Array[T](width * height)
+
+	override def size = width * height
 
 	def apply(x: Int, y: Int): T = arr(index(x, y))
 
@@ -16,11 +18,22 @@ class Array2D[@specialized(Specializable.Primitives) T: ClassTag](size: Int) ext
 	def update(pos: (Int, Int), v: T): Unit = update(pos._1, pos._2, v)
 
 	def foreach[U](f: (Pos[T]) => U): Unit =
-		cforRange2(0 until size, 0 until size)((x: Int, y: Int) =>
+		cforRange2(0 until width, 0 until height)((x: Int, y: Int) =>
 			f(Pos(x, y, this(x, y)))
 		)
 
-	private def index(x: Int, y: Int) = x * size + y
+	def transform(f: (Pos[T] => T)): Array2D[T] = {
+		cforRange2(0 until width, 0 until height)((x: Int, y: Int) =>
+			this(x, y) = f(Pos(x, y, this(x, y)))
+		)
+		this
+	}
+
+	private def index(x: Int, y: Int) = {
+		if (!(x >= 0 && x < width && y >= 0 && y < height))
+			throw new IndexOutOfBoundsException(s"Indexes $x, $y are out of bounds of $width, $height")
+		x + y * width
+	}
 }
 
 final case class Pos[@specialized(Specializable.Primitives) T](x: Int, y: Int, v: T)
