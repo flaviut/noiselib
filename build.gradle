@@ -7,8 +7,6 @@ dependencies { compile project(':macros') }
 
 idea { module { excludeDirs += file('.idea') } }
 
-tasks.withType(ScalaCompile) { compileScala.scalaCompileOptions.useAnt = false }
-
 run { ignoreExitValue = true }
 
 allprojects {
@@ -79,5 +77,11 @@ allprojects {
 			jdkName = '1.8'
 			languageLevel = '1.8'
 		}
+	}
+
+	tasks.withType(ScalaCompile) { compileScala.scalaCompileOptions.useAnt = false }
+
+	compileScala {
+		scalaCompileOptions.additionalParameters = ["-Xfatal-warnings", "-feature", "-Ywarn-all", "-Xlint"]
 	}
 }
