@@ -27,8 +27,8 @@ class Array2DTest extends TestBase {
 
 	"Placing something in a 2d array" must "persist across accesses" in {
 		forAll(Array2DGen)(arr => {
-			val locs = for {Pos(x, y, _) <- arr
-			                v = Random.nextDouble()} yield {arr(x, y) = v; Pos(x, y, v)}
+			val locs = for {Indexer2D(x, y, _) <- arr
+			                v = Random.nextDouble()} yield {arr(x, y) = v; Indexer2D(x, y, v)}
 			for (pos <- locs)
 				pos.v mustEqual arr(pos.x, pos.y)
 		})
