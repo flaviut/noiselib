@@ -3,8 +3,6 @@ package factorygame.util.noise
 import scala.math._
 
 trait SeamlessNoise extends NoiseSource {
-	val startX: Int    = 0
-	val startY: Int    = 0
 	val width : Int    = 512
 	val height: Int    = 512
 	val scale : Double = 20

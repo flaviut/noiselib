@@ -384,7 +384,7 @@ object Simplex {
 
 	private def dot(g: Grad, x: Double, y: Double, z: Double, w: Double) = g.x * x + g.y * y + g.z * z + g.w * w
 
-	private def floor(x: Double) = x.toInt
+	private def floor(x: Double) = if (x > 0) x.toInt else x.toInt - 1
 
 	private final val grad3 = Array(
 		Grad(1, 1, 0), Grad(-1, 1, 0), Grad(1, -1, 0), Grad(-1, -1, 0),
