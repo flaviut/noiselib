@@ -67,12 +67,14 @@ trait LinearInterp extends WhiteNoise {
 	}
 
 	override def gen(x: Double, y: Double, z: Double, w: Double) = {
+		// Yes, the code is ugly. But manual unrolling makes a huge
+		// performance difference
 		val (x1, x2) = (floor(x), floor(x) + 1)
 		val (y1, y2) = (floor(y), floor(y) + 1)
 		val (z1, z2) = (floor(z), floor(z) + 1)
 		val (w1, w2) = (floor(w), floor(w) + 1)
 
-		val ret = lerp(x, y, z, w,
+		lerp(x, y, z, w,
 			x1, y1, z1, w1,
 			x2, y2, z2, w2,
 			Array(
@@ -93,11 +95,6 @@ trait LinearInterp extends WhiteNoise {
 				get(x2, y2, z2, w1),
 				get(x2, y2, z2, w2)
 			))
-
-		if (ret > 1 || ret < -1)
-			println(s"bad ret: $x,$y,$z,$w , $ret")
-
-		ret
 	}
 
 	@inline protected def interp(a: Double, b: Double, x: Double) = a * (1 - x) + b * x

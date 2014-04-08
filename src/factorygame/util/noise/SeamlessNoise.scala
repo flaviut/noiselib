@@ -2,6 +2,13 @@ package factorygame.util.noise
 
 import scala.math._
 
+/**
+ * Seamless noise in 2D. Is a bit slower because it samples
+ * from 4D noise in the same way you can sample 1D seamless
+ * noise from tracing a circle in 2D space
+ *
+ * Thanks to JTippetts, http://www.gamedev.net/blog/33/entry-2138456-seamless-noise/
+ */
 trait SeamlessNoise extends NoiseSource {
 	val width : Int    = 512
 	val height: Int    = 512

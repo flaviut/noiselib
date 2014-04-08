@@ -6,7 +6,7 @@ trait P2 extends Product2[Int, Int] {
 	def x: Int
 	def y: Int
 
-	override def canEqual(that: Any): Boolean = ???
+	override def canEqual(that: Any): Boolean = that.isInstanceOf[P2]
 	override def _1: Int = x
 	override def _2: Int = y
 
@@ -24,7 +24,7 @@ trait P2 extends Product2[Int, Int] {
 trait P3 extends P2 with Product3[Int, Int, Int] {
 	def z: Int
 
-	override def canEqual(that: Any): Boolean = ???
+	override def canEqual(that: Any): Boolean = that.isInstanceOf[P3]
 	override def _3: Int = z
 
 	override def hashCode = {
@@ -42,7 +42,7 @@ trait P3 extends P2 with Product3[Int, Int, Int] {
 trait P4 extends P3 with Product4[Int, Int, Int, Int] {
 	def w: Int
 
-	override def canEqual(that: Any): Boolean = ???
+	override def canEqual(that: Any): Boolean = that.isInstanceOf[P4]
 	override def _4: Int = w
 
 	override def hashCode = {
