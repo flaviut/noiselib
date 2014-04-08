@@ -1,6 +1,5 @@
-package factorygame.util.noise
+package noiselib
 
-import factorygame.{ParallelTestBase, TestBase}
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import scala.util.Random

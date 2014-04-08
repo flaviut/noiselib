@@ -1,11 +1,10 @@
-package factorygame.util.noise
+package noiselib
 
 import org.scalacheck.Gen
-import factorygame.util.geom.{Vec4, Vec3, Vec2}
 import org.scalatest.MustMatchers
 import org.scalatest.prop.GeneratorDrivenPropertyChecks._
 import scala.util.Random
-
+import noiselib.util.geom._
 
 object NoiseTest extends MustMatchers {
 	implicit val Point2dGen =

@@ -1,8 +1,8 @@
-package factorygame.util
+package noiselib
+package util
 
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import factorygame.{ParallelTestBase, TestBase}
 import org.scalacheck.Gen
 
 @RunWith(classOf[JUnitRunner])

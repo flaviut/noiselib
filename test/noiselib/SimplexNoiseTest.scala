@@ -1,10 +1,9 @@
-package factorygame.util.noise
+package noiselib
 
-import factorygame.util.noise.NoiseTest._
+import noiselib.NoiseTest._
 import scala.util.Random
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import factorygame.{ParallelTestBase, TestBase}
 
 @RunWith(classOf[JUnitRunner]) class SimplexNoiseTest extends ParallelTestBase {
 	val simplexNoise = new Simplex(Random.nextInt())

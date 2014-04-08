@@ -1,6 +1,6 @@
-package factorygame.util
+package noiselib.util
 
-import factorygame.util.geom.{P2, P3, P4}
+import noiselib.util.geom.{P2, P3, P4}
 
 /** Allows for iterating over 2D arrays by both element and index */
 final case class Indexer2D[@specialized T](x: Int, y: Int, v: T) extends P2

@@ -1,10 +1,11 @@
-package factorygame.util
+package noiselib
+package util
 
-import factorygame.{ParallelTestBase, TestBase}
 import org.scalacheck.Gen
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import scala.util.Random
+import noiselib.ParallelTestBase
 
 @RunWith(classOf[JUnitRunner])
 class Array2DTest extends ParallelTestBase {

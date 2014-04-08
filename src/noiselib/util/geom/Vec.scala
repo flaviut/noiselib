@@ -1,4 +1,4 @@
-package factorygame.util.geom
+package noiselib.util.geom
 
 import spire.math._
 import spire.implicits._

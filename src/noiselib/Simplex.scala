@@ -1,4 +1,4 @@
-package factorygame.util.noise
+package noiselib
 
 import scala.math._
 import scala.util.Random
@@ -379,6 +379,9 @@ object Simplex {
 	private final val G3 = 1.0 / 6.0
 	private final val F4 = (math.sqrt(5.0) - 1.0) / 4.0
 	private final val G4 = (5.0 - math.sqrt(5.0)) / 20.0
+
+	// XXX Duplicated code to work around a compiler bug
+	def floor(x: Double) = if (x > 0) x.toInt else x.toInt - 1
 
 	private def dot(g: Grad, x: Double, y: Double) = g.x * x + g.y * y
 

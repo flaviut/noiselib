@@ -1,6 +1,6 @@
-package factorygame.util.noise
+package noiselib
 
-import factorygame.util.{ParBuffer2D, Buffer2D}
+import noiselib.util.{ParBuffer2D, Buffer2D}
 
 abstract class NoiseSource {
 	def gen(x: Double, y: Double): Double

@@ -1,10 +1,10 @@
-package factorygame
+package noiselib
 package util
 
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import factorygame.TestBase
 import org.scalacheck.Gen
+import noiselib.ParallelTestBase
 
 @RunWith(classOf[JUnitRunner]) class Buffer2DTest extends ParallelTestBase {
 	implicit val Array2DGen = for {
@@ -18,7 +18,7 @@ import org.scalacheck.Gen
 		})
 	}
 
-	"Parallel iteration" must "be faster than sequential processing" taggedAs Benchmark in {
+	"Parallel iteration" must "be faster than sequential processing" in {
 		val arr = new Array2D[Int](500, 500)
 		val parArr = arr.par
 		val rand = new PositionalRandom()

@@ -1,9 +1,8 @@
-package factorygame.util.noise
+package noiselib
 
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import factorygame.{ParallelTestBase, TestBase}
-import factorygame.util.noise.NoiseTest._
+import NoiseTest._
 
 @RunWith(classOf[JUnitRunner]) class FractalBrownianMotionTest extends ParallelTestBase {
 	val noise = new WhiteNoise with LinearInterp with FractalBrownianMotion

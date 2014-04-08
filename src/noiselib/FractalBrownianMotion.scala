@@ -1,4 +1,4 @@
-package factorygame.util.noise
+package noiselib
 
 import spire.syntax.cfor._
 

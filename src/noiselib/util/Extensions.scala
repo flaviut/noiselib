@@ -1,10 +1,10 @@
-package factorygame.util
+package noiselib.util
 
 import java.awt.image.BufferedImage
 import java.io.File
 import javax.imageio.ImageIO
 
-package object extensions {
+object Extensions {
 
 	implicit class EnhancedImage(pix: BufferedImage) extends Buffer2D[Color] {
 		override def update(x: Int, y: Int, v: Color) = pix.setRGB(x, y, v.rgba)

@@ -1,4 +1,4 @@
-package factorygame.util
+package noiselib.util
 
 import scala.reflect.ClassTag
 import scala.collection.Traversable
@@ -88,44 +88,6 @@ class ParBuffer2D[@specialized(Specializable.Primitives) T](buff: Buffer2D[T])
 	                        .asInstanceOf[IterableSplitter[Indexer2D[T]]]
 
 	override def seq = buff.toIterable
-
-	/*
-	protected class ParBuffer2dSplitter(start: Int, var stop: Int) extends IterableSplitter[Indexer2D[T]] {
-		var (x, y) = (0, start)
-
-		override def remaining: Int = (stop - y) * width - x
-
-		override def split: Seq[IterableSplitter[Indexer2D[T]]] = {
-			val pivotY = ((stop - y) / 2) + y
-			val ret = List(this, new ParBuffer2dSplitter(pivotY + 1, stop))
-			stop = pivotY
-			ret
-		}
-
-		override def dup = {
-			val ret = new ParBuffer2dSplitter(start, stop)
-			ret.x = x
-			ret.y = y
-
-			ret
-		}
-
-		override def next() = {
-			val ret = Indexer2D(x, y, apply(x, y))
-
-			if (x + 1 < width)
-				x += 1
-			else {
-				x = 0
-				y += 1
-			}
-
-			ret
-		}
-
-		override def hasNext: Boolean = x < width && y < stop
-	}
-	*/
 }
 
 class Array2D[@specialized(Specializable.Primitives) T: ClassTag](val width: Int, val height: Int) extends Buffer2D[T] {

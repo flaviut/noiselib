@@ -1,4 +1,4 @@
-package object factorygame {
+package object noiselib {
 	var PreventOpt: Any = 0.asInstanceOf[Any]
 
 	def compareFuncs[T](f1: () => T, f2: () => T) = {

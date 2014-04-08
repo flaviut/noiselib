@@ -1,4 +1,4 @@
-package factorygame.util.geom
+package noiselib.util.geom
 
 import scala.util.hashing.MurmurHash3._
 

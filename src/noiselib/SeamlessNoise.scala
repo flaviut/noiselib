@@ -1,4 +1,4 @@
-package factorygame.util.noise
+package noiselib
 
 import scala.math._
 
@@ -15,13 +15,13 @@ trait SeamlessNoise extends NoiseSource {
 	val scale : Double = 20
 
 	abstract override def gen(x: Double, y: Double): Double = {
-		val s = x / width
-		val t = y / height
+		val u = x / width
+		val v = y / height
 
-		val nx = scale * cos(s * 2 * Pi) / (2 * Pi)
-		val ny = scale * cos(t * 2 * Pi) / (2 * Pi)
-		val nz = scale * sin(s * 2 * Pi) / (2 * Pi)
-		val nw = scale * sin(t * 2 * Pi) / (2 * Pi)
+		val nx = scale * cos(u * 2 * Pi) / (2 * Pi)
+		val ny = scale * cos(v * 2 * Pi) / (2 * Pi)
+		val nz = scale * sin(u * 2 * Pi) / (2 * Pi)
+		val nw = scale * sin(v * 2 * Pi) / (2 * Pi)
 
 		super.gen(nx, ny, nz, nw)
 	}

@@ -1,10 +1,9 @@
-package factorygame.util
-package noise
+package noiselib
 
-import factorygame.util.PositionalRandom
 import spire.syntax.literals.radix.radix
 import spire.syntax.cfor._
 import math.abs
+import noiselib.util.PositionalRandom
 
 /**
  * Creates non-coherent random noise
@@ -138,6 +137,9 @@ trait LinearInterp extends WhiteNoise {
 
 		lerp(y, z, w, y1, z1, w1, y2, z2, w2, vxxx)
 	}
+
+	// XXX Duplicated code to work around a compiler bug
+	private def floor(x: Double) = if (x > 0) x.toInt else x.toInt - 1
 }
 
 /**

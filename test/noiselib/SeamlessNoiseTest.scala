@@ -1,10 +1,9 @@
-package factorygame.util.noise
+package noiselib
 
-import factorygame.{ParallelTestBase, TestBase}
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import scala.util.Random
-import factorygame.util.noise.NoiseTest._
+import noiselib.NoiseTest._
 
 @RunWith(classOf[JUnitRunner]) class SeamlessNoiseTest extends ParallelTestBase {
 	val seamlessWhite = new WhiteNoise(Random.nextInt()) with LinearInterp with SeamlessNoise {

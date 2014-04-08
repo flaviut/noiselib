@@ -1,4 +1,4 @@
-package factorygame.util
+package noiselib.util
 
 /**
  * PRNG that returns the same thing for any call with the same seed and position

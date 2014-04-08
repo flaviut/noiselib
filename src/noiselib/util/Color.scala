@@ -1,5 +1,4 @@
-package factorygame.util
-
+package noiselib.util
 
 class Color(val rgba: Int) extends AnyVal {
 	def fr = r.toFloat / 255
