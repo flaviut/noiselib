@@ -27,8 +27,8 @@ import org.scalacheck.Gen
 			() => parArr.tabulate(v => rand.get(v.x, v.y)),
 			() => arr.tabulate(v => rand.get(v.x, v.y)))
 		val mTime = compareFuncs(
-			() => parArr.reduce((p, n) => Indexer2D(0, 0, FastMath.atan2(p.v, n.v).toInt)),
-			() => arr.reduce((p, n) => Indexer2D(0, 0, FastMath.atan2(p.v, n.v).toInt)))
+			() => parArr.reduce((p, n) => Indexer2D(0, 0, math.atan2(p.v, n.v).toInt)),
+			() => arr.reduce((p, n) => Indexer2D(0, 0, math.atan2(p.v, n.v).toInt)))
 
 		println(tTime)
 		tTime._1 mustBe <(tTime._2)

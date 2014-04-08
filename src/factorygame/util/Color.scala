@@ -60,11 +60,4 @@ object Color {
 			c.getGreen,
 			c.getBlue,
 			c.getAlpha)
-
-	def apply(c: org.lwjgl.util.Color): Color =
-		Color(
-			c.getRed,
-			c.getGreen,
-			c.getBlue,
-			c.getAlpha)
 }
