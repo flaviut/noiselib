@@ -26,6 +26,7 @@ allprojects {
 				[
 						gdx        : '0.9.9',
 						scala      : '2.10.3',
+						pickling   : '0.8.0-SNAPSHOT',
 						sscala     : 'Replaced with first 4 digits of scala',
 						akka       : '2.+',
 						scalacheck : '1.11.1',
@@ -47,11 +48,11 @@ allprojects {
 		compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
 
 		compile "org.scala-lang:scala-library:$ver.scala"
+		compile "org.scala-lang:scala-pickling_$ver.sscala:$ver.pickling"
 		compile "com.typesafe.akka:akka-actor_$ver.sscala:$ver.akka"
 		compile "org.spire-math:spire_$ver.sscala:$ver.spire"
 		compile "org.javolution:javolution-core-java:$ver.javalution"
 		compile "com.orientechnologies:orientdb-core:$ver.orientdb"
-		compile fileTree(dir: 'libs', include: '*.jar')
 
 		testCompile "org.scalacheck:scalacheck_$ver.sscala:$ver.scalacheck"
 		testCompile "org.scalatest:scalatest_$ver.sscala:$ver.scalatest"

@@ -6,7 +6,7 @@ import org.scalatest.junit.JUnitRunner
 import factorygame.TestBase
 import org.scalacheck.Gen
 
-@RunWith(classOf[JUnitRunner]) class Buffer2DTest extends TestBase {
+@RunWith(classOf[JUnitRunner]) class Buffer2DTest extends ParallelTestBase {
 	implicit val Array2DGen = for {
 		w <- Gen.choose(1, 50)
 		h <- Gen.choose(1, 50)
@@ -18,7 +18,7 @@ import org.scalacheck.Gen
 		})
 	}
 
-	"Parallel iteration" must "be faster than sequential processing" in {
+	"Parallel iteration" must "be faster than sequential processing" taggedAs Benchmark in {
 		val arr = new Array2D[Int](500, 500)
 		val parArr = arr.par
 		val rand = new PositionalRandom()

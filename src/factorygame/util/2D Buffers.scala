@@ -128,8 +128,6 @@ class ParBuffer2D[@specialized(Specializable.Primitives) T](buff: Buffer2D[T])
 	*/
 }
 
-final case class Indexer2D[@specialized(Specializable.Primitives) T](x: Int, y: Int, v: T)
-
 class Array2D[@specialized(Specializable.Primitives) T: ClassTag](val width: Int, val height: Int) extends Buffer2D[T] {
 	private val arr = new Array[T](width * height)
 

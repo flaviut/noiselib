@@ -1,12 +1,12 @@
 package factorygame.util.noise
 
-import factorygame.TestBase
+import factorygame.{ParallelTestBase, TestBase}
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import scala.util.Random
 import NoiseTest._
 
-@RunWith(classOf[JUnitRunner]) class WhileNoiseTest extends TestBase {
+@RunWith(classOf[JUnitRunner]) class WhileNoiseTest extends ParallelTestBase {
 	val linInterNoise = new WhiteNoise(Random.nextInt()) with LinearInterp
 	val neaInterNoise = new WhiteNoise(Random.nextInt()) with NearestNeighborInterp
 

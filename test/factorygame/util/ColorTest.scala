@@ -2,11 +2,11 @@ package factorygame.util
 
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import factorygame.TestBase
+import factorygame.{ParallelTestBase, TestBase}
 import org.scalacheck.Gen
 
 @RunWith(classOf[JUnitRunner])
-class ColorTest extends TestBase {
+class ColorTest extends ParallelTestBase {
 	final val ColorGen = for {
 		r <- Gen.choose(0, 255)
 		g <- Gen.choose(0, 255)

@@ -1,13 +1,13 @@
 package factorygame.util
 
-import factorygame.TestBase
+import factorygame.{ParallelTestBase, TestBase}
 import org.scalacheck.Gen
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import scala.util.Random
 
 @RunWith(classOf[JUnitRunner])
-class Array2DTest extends TestBase {
+class Array2DTest extends ParallelTestBase {
 	implicit val Array2DGen = for {
 		w <- Gen.choose(1, 50)
 		h <- Gen.choose(1, 50)

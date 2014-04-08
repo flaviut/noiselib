@@ -4,9 +4,9 @@ import factorygame.util.noise.NoiseTest._
 import scala.util.Random
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import factorygame.TestBase
+import factorygame.{ParallelTestBase, TestBase}
 
-@RunWith(classOf[JUnitRunner]) class SimplexNoiseTest extends TestBase {
+@RunWith(classOf[JUnitRunner]) class SimplexNoiseTest extends ParallelTestBase {
 	val simplexNoise = new Simplex(Random.nextInt())
 
 	"2D simplex noise" must "only return values within [-1,1]" in {
