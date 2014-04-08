@@ -133,6 +133,8 @@ class Simplex(val seed: Int = 0) extends NoiseSource {
 		var (k1, i2) = (0, 0)
 		var (j2, k2) = (0, 0)
 
+		// Unrolled tuple unpacking for performance
+		// See http://stackoverflow.com/a/20863379/2299084
 		if (x0 >= y0) {
 			if (y0 >= z0) {
 				// X Y Z order
@@ -383,8 +385,6 @@ object Simplex {
 	private def dot(g: Grad, x: Double, y: Double, z: Double) = g.x * x + g.y * y + g.z * z
 
 	private def dot(g: Grad, x: Double, y: Double, z: Double, w: Double) = g.x * x + g.y * y + g.z * z + g.w * w
-
-	private def floor(x: Double) = if (x > 0) x.toInt else x.toInt - 1
 
 	private final val grad3 = Array(
 		Grad(1, 1, 0), Grad(-1, 1, 0), Grad(1, -1, 0), Grad(-1, -1, 0),

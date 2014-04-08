@@ -2,6 +2,7 @@ package factorygame.util.geom
 
 import scala.util.hashing.MurmurHash3._
 
+
 trait P2 extends Product2[Int, Int] {
 	def x: Int
 	def y: Int
