@@ -12,7 +12,7 @@ trait FractalBrownianMotion extends NoiseSource {
 	val gain      : Double = 0.5
 	val lacunarity: Double = 3.0
 
-	abstract override def gen(x: Double, y: Double) = {
+	abstract override def gen(x: Double, y: Double): Double = {
 		var out = 0.0
 		var freq = frequency
 		var amplitude = gain
@@ -26,7 +26,7 @@ trait FractalBrownianMotion extends NoiseSource {
 		out
 	}
 
-	abstract override def gen(x: Double, y: Double, z: Double) = {
+	abstract override def gen(x: Double, y: Double, z: Double): Double = {
 		var out = 0.0
 		var freq = frequency
 		var amplitude = gain
@@ -40,7 +40,7 @@ trait FractalBrownianMotion extends NoiseSource {
 		out
 	}
 
-	abstract override def gen(x: Double, y: Double, z: Double, w: Double) = {
+	abstract override def gen(x: Double, y: Double, z: Double, w: Double): Double = {
 		var out = 0.0
 		var freq = frequency
 		var amplitude = gain

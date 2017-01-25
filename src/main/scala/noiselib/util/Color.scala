@@ -1,28 +1,28 @@
 package noiselib.util
 
 class Color(val rgba: Int) extends AnyVal {
-	def fr = r.toFloat / 255
-	def fg = g.toFloat / 255
-	def fb = b.toFloat / 255
-	def fa = a.toFloat / 255
+	def fr: Float = r.toFloat / 255
+	def fg: Float = g.toFloat / 255
+	def fb: Float = b.toFloat / 255
+	def fa: Float = a.toFloat / 255
 
-	def r = rgba >> 24 & 0xFF
-	def g = rgba >> 16 & 0xFF
-	def b = rgba >> 8 & 0xFF
-	def a = rgba & 0xFF
+	def r: Int = rgba >> 24 & 0xFF
+	def g: Int = rgba >> 16 & 0xFF
+	def b: Int = rgba >> 8 & 0xFF
+	def a: Int = rgba & 0xFF
 
-	def +(v: Long) = update((r + v).toInt, (g + v).toInt, (b + v).toInt)
-	def -(v: Long) = update((r - v).toInt, (g - v).toInt, (b - v).toInt)
+	def +(v: Long): Color = update((r + v).toInt, (g + v).toInt, (b + v).toInt)
+	def -(v: Long): Color = update((r - v).toInt, (g - v).toInt, (b - v).toInt)
 
-	def +(v: Double) = fupdate(fr + v, fg + v, fb + v)
-	def -(v: Double) = fupdate(fr - v, fg - v, fb - v)
-	def *(v: Double) = fupdate(fr * v, fg * v, fb * v)
-	def /(v: Double) = fupdate(fr / v, fg / v, fb / v)
+	def +(v: Double): Color = fupdate(fr + v, fg + v, fb + v)
+	def -(v: Double): Color = fupdate(fr - v, fg - v, fb - v)
+	def *(v: Double): Color = fupdate(fr * v, fg * v, fb * v)
+	def /(v: Double): Color = fupdate(fr / v, fg / v, fb / v)
 
-	def +(v: Color) = update(r + v.r, g + v.g, b + v.b)
-	def -(v: Color) = update(r - v.r, g - v.g, b - v.b)
-	def *(v: Color) = fupdate(fr * v.fr, fg * v.fg, fb * v.fb)
-	def /(v: Color) = fupdate(fr / v.fr, fg / v.fg, fb / v.fb)
+	def +(v: Color): Color = update(r + v.r, g + v.g, b + v.b)
+	def -(v: Color): Color = update(r - v.r, g - v.g, b - v.b)
+	def *(v: Color): Color = fupdate(fr * v.fr, fg * v.fg, fb * v.fb)
+	def /(v: Color): Color = fupdate(fr / v.fr, fg / v.fg, fb / v.fb)
 
 	def update(newR: Int = r, newG: Int = g, newB: Int = b, newA: Int = a): Color =
 		Color(newR, newG, newB, newA)

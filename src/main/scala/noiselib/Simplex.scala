@@ -104,7 +104,7 @@ class Simplex(val seed: Int = 0) extends NoiseSource {
 		70.0 * (n0 + n1 + n2)
 	}
 
-	def gen(x: Double, y: Double, z: Double) = {
+	def gen(x: Double, y: Double, z: Double): Double = {
 		// Skew the input space to determine which simplex cell we're in
 		val s = (x + y + z) * F3
 		val i = floor(x + s)
@@ -381,7 +381,7 @@ object Simplex {
 	private final val G4 = (5.0 - math.sqrt(5.0)) / 20.0
 
 	// XXX Duplicated code to work around a compiler bug
-	def floor(x: Double) = if (x > 0) x.toInt else x.toInt - 1
+	def floor(x: Double): Int = if (x > 0) x.toInt else x.toInt - 1
 
 	private def dot(g: Grad, x: Double, y: Double) = g.x * x + g.y * y
 

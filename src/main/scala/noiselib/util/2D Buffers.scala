@@ -11,7 +11,7 @@ protected trait BaseBuffer2D[@specialized(Specializable.Primitives) T] {
 
 	def height: Int
 
-	def size = width * height
+	def size: Int = width * height
 
 	/**
 	 * Must throw an IndexOutOfBoundsException if the index is out of bounds
@@ -29,7 +29,7 @@ protected trait BaseBuffer2D[@specialized(Specializable.Primitives) T] {
 }
 
 trait Buffer2D[@specialized(Specializable.Primitives) T] extends Traversable[Indexer2D[T]] with BaseBuffer2D[T] {
-	override def size = width * height
+	override def size: Int = width * height
 
 	override def companion: GenericCompanion[Traversable] = super.companion
 
@@ -69,25 +69,25 @@ class ParBuffer2D[@specialized(Specializable.Primitives) T](buff: Buffer2D[T])
 
 	override def width: Int = buff.width
 
-	def transform(f: Indexer2D[T] => T) =
+	def transform(f: Indexer2D[T] => T): Unit =
 		for (y <- (0 until width).par) {
 			cfor(0)(_ < height, _ + 1)(x => {
 				this(x, y) = f(Indexer2D(x, y, this(x, y)))
 			})
 		}
 
-	def tabulate(f: Indexer2D[Null] => T) =
+	def tabulate(f: Indexer2D[Null] => T): Unit =
 		for (y <- (0 until width).par) {
 			cfor(0)(_ < height, _ + 1)(x => {
 				this(x, y) = f(Indexer2D(x, y, null))
 			})
 		}
 
-	override def splitter = bufView.getClass.getDeclaredMethod("splitter")
+	override def splitter: IterableSplitter[Indexer2D[T]] = bufView.getClass.getDeclaredMethod("splitter")
 	                        .invoke(bufView)
 	                        .asInstanceOf[IterableSplitter[Indexer2D[T]]]
 
-	override def seq = buff.toIterable
+	override def seq: Iterable[Indexer2D[T]] = buff.toIterable
 }
 
 class Array2D[@specialized(Specializable.Primitives) T: ClassTag](val width: Int, val height: Int) extends Buffer2D[T] {

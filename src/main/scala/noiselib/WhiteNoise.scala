@@ -30,7 +30,7 @@ abstract class WhiteNoise(seed: Int = 0) extends NoiseSource {
  * Performs smooth transitions between points
  */
 trait LinearInterp extends WhiteNoise {
-	override def gen(x: Double, y: Double) = {
+	override def gen(x: Double, y: Double): Double = {
 		val (x1, x2) = (floor(x), floor(x) + 1)
 		val (y1, y2) = (floor(y), floor(y) + 1)
 
@@ -45,7 +45,7 @@ trait LinearInterp extends WhiteNoise {
 			))
 	}
 
-	override def gen(x: Double, y: Double, z: Double) = {
+	override def gen(x: Double, y: Double, z: Double): Double = {
 		val (x1, x2) = (floor(x), floor(x) + 1)
 		val (y1, y2) = (floor(y), floor(y) + 1)
 		val (z1, z2) = (floor(z), floor(z) + 1)
@@ -65,7 +65,7 @@ trait LinearInterp extends WhiteNoise {
 			))
 	}
 
-	override def gen(x: Double, y: Double, z: Double, w: Double) = {
+	override def gen(x: Double, y: Double, z: Double, w: Double): Double = {
 		// Yes, the code is ugly. But manual unrolling makes a huge
 		// performance difference
 		val (x1, x2) = (floor(x), floor(x) + 1)
@@ -96,7 +96,7 @@ trait LinearInterp extends WhiteNoise {
 			))
 	}
 
-	@inline protected def interp(a: Double, b: Double, x: Double) = a * (1 - x) + b * x
+	@inline protected def interp(a: Double, b: Double, x: Double): Double = a * (1 - x) + b * x
 
 
 	@inline private def lerp(x: Double,

@@ -11,7 +11,7 @@ trait P2 extends Product2[Int, Int] {
 	override def _1: Int = x
 	override def _2: Int = y
 
-	override def hashCode = {
+	override def hashCode: Int = {
 		var h = mix(0xC936560E, x)
 		h = mixLast(h, y)
 		finalizeHash(h, 2)
@@ -28,7 +28,7 @@ trait P3 extends P2 with Product3[Int, Int, Int] {
 	override def canEqual(that: Any): Boolean = that.isInstanceOf[P3]
 	override def _3: Int = z
 
-	override def hashCode = {
+	override def hashCode: Int = {
 		var h = mix(0xC936560E, x)
 		h = mix(h, y)
 		h = mixLast(h, z)
@@ -46,7 +46,7 @@ trait P4 extends P3 with Product4[Int, Int, Int, Int] {
 	override def canEqual(that: Any): Boolean = that.isInstanceOf[P4]
 	override def _4: Int = w
 
-	override def hashCode = {
+	override def hashCode: Int = {
 		var h = mix(0xC936560E, x)
 		h = mix(h, y)
 		h = mix(h, z)

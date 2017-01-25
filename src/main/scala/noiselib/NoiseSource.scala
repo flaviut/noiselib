@@ -9,19 +9,19 @@ abstract class NoiseSource {
 
 	def gen(x: Double, y: Double, z: Double, w: Double): Double
 
-	def fillDoubles(b: Buffer2D[Double]) = b.tabulate(v => gen(v.x, v.y))
+	def fillDoubles(b: Buffer2D[Double]): Unit = b.tabulate(v => gen(v.x, v.y))
 
-	def fillFloats(b: Buffer2D[Float]) = b.tabulate(v => gen(v.x, v.y).toFloat)
+	def fillFloats(b: Buffer2D[Float]): Unit = b.tabulate(v => gen(v.x, v.y).toFloat)
 
-	def fillBytes(b: Buffer2D[Byte]) = b.tabulate(v => (gen(v.x, v.y) * Byte.MaxValue).toByte)
+	def fillBytes(b: Buffer2D[Byte]): Unit = b.tabulate(v => (gen(v.x, v.y) * Byte.MaxValue).toByte)
 
-	def fillShorts(b: Buffer2D[Short]) = b.tabulate(v => (gen(v.x, v.y) * Short.MaxValue).toShort)
+	def fillShorts(b: Buffer2D[Short]): Unit = b.tabulate(v => (gen(v.x, v.y) * Short.MaxValue).toShort)
 
-	def fillDoubles(b: ParBuffer2D[Double]) = b.tabulate(v => gen(v.x, v.y))
+	def fillDoubles(b: ParBuffer2D[Double]): Unit = b.tabulate(v => gen(v.x, v.y))
 
-	def fillFloats(b: ParBuffer2D[Float]) = b.tabulate(v => gen(v.x, v.y).toFloat)
+	def fillFloats(b: ParBuffer2D[Float]): Unit = b.tabulate(v => gen(v.x, v.y).toFloat)
 
-	def fillBytes(b: ParBuffer2D[Byte]) = b.tabulate(v => (gen(v.x, v.y) * Byte.MaxValue).toByte)
+	def fillBytes(b: ParBuffer2D[Byte]): Unit = b.tabulate(v => (gen(v.x, v.y) * Byte.MaxValue).toByte)
 
-	def fillShorts(b: ParBuffer2D[Short]) = b.tabulate(v => (gen(v.x, v.y) * Short.MaxValue).toShort)
+	def fillShorts(b: ParBuffer2D[Short]): Unit = b.tabulate(v => (gen(v.x, v.y) * Short.MaxValue).toShort)
 }
