@@ -1,0 +1,9 @@
+#!/bin/bash
+./noiselib -h 330 -w 660 -a WhiteNoiseNearest --scale 20 -s 1 --out nn_s20_1.png
+./noiselib -h 330 -w 660 -a WhiteNoiseNearest --scale 20 -s 2 --out nn_s20_2.png
+./noiselib -h 330 -w 660 -a WhiteNoiseLinear --scale 20 -s 1 --out lin_s20_1.png
+./noiselib -h 330 -w 660 -a Simplex --scale 20 -s 1 --out sim_s20_1.png
+./noiselib -h 330 -w 660 -a Simplex --scale 400 -s 1 --out sim_s400_1.png
+./noiselib -h 330 -w 660 -a Simplex --scale 400 -s 1 --fbm --out sim_s400_fbm_1.png
+./noiselib -h 330 -w 660 -a Simplex --scale 20 -s 1 --fbm --out sim_s20_fbm_1.png
+./noiselib -h 330 -w 660 -a WhiteNoiseNearest --scale 5 -s 1 --fbm --out nn_s5_fbm_1.png

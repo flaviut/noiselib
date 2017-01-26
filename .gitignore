@@ -1,7 +1,7 @@
 *.iml
 *.ipr
 *.iws
-*.png
+out.png
 .idea/
 .gradle/
 build/
